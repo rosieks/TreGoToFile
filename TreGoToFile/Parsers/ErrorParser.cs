@@ -9,9 +9,10 @@ namespace TreGoToFile.Parsers
 {
     internal class ErrorParser
     {
-        IErrorParser[] parsers = new[]
+        IErrorParser[] parsers = new IErrorParser[]
         {
             new JSHintErrorParser(),
+            new TypeScriptParser(),
         };
 
         internal FilePoint GetError(TextPointer pointer)

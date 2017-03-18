@@ -9,6 +9,6 @@ namespace TreGoToFile.Parsers
 {
     internal interface IErrorParser
     {
-        FilePoint GetError(TextPointer ponter);
+        FilePoint GetError(TextPointer pointer);
     }
 }

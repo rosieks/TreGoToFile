@@ -71,11 +71,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="DTEExtensions.cs" />
+    <Compile Include="Extensions\DTEExtensions.cs" />
+    <Compile Include="Extensions\TextPointerExtensions.cs" />
     <Compile Include="FilePoint.cs" />
     <Compile Include="Parsers\ErrorParser.cs" />
     <Compile Include="Parsers\IErrorParser.cs" />
     <Compile Include="Parsers\JSHintParser.cs" />
+    <Compile Include="Parsers\TypeScriptParser.cs" />
     <Compile Include="TaskRunnerExplorerConsole.cs" />
     <Compile Include="TreGoToFilePackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

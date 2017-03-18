@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using TreGoToFile.Extensions;
 using TreGoToFile.Parsers;
 
 namespace TreGoToFile
@@ -17,7 +18,7 @@ namespace TreGoToFile
             if (output != null)
             {
                 var errorLocation = parser.GetError(output.GetPositionFromPoint(e.GetPosition(output), true));
-                if (File.Exists(errorLocation.Path))
+                if (errorLocation != null && File.Exists(errorLocation.Path))
                 {
                     TreGoToFilePackage.DTE.OpenFileInPreviewTab(errorLocation.Path, errorLocation.Line, errorLocation.Column);
                 }
