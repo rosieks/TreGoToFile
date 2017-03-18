@@ -18,9 +18,20 @@ namespace TreGoToFile
             if (output != null)
             {
                 var errorLocation = parser.GetError(output.GetPositionFromPoint(e.GetPosition(output), true));
-                if (errorLocation != null && File.Exists(errorLocation.Path))
+                if (errorLocation != null)
                 {
-                    TreGoToFilePackage.DTE.OpenFileInPreviewTab(errorLocation.Path, errorLocation.Line, errorLocation.Column);
+                    string path = errorLocation.Path;
+                    if (!File.Exists(path))
+                    {
+                        var console = GetTaskRunnerConsole(output);
+                        var workingDirectory = GetWorkingDirectory(console);
+                        path = Path.Combine(workingDirectory, path);
+                    }
+
+                    if (File.Exists(path))
+                    {
+                        TreGoToFilePackage.DTE.OpenFileInPreviewTab(path, errorLocation.Line, errorLocation.Column);
+                    }
                 }
             }
         }
@@ -35,6 +46,33 @@ namespace TreGoToFile
             {
                 return null;
             }
+        }
+
+        private static object GetTaskRunnerConsole(FrameworkElement element)
+        {
+            while (element != null && element.GetType().Name != "TaskRunnerConsoleUserControl")
+            {
+                element = element.Parent as FrameworkElement;
+            }
+
+            if (element.GetType().Name == "TaskRunnerConsoleUserControl")
+            {
+                var console = element.GetType().GetProperty("Console").GetValue(element);
+
+                return console;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private static string GetWorkingDirectory(object console)
+        {
+            var task = console.GetType().GetProperty("Task").GetValue(console);
+            var command = task.GetType().GetProperty("Command").GetValue(task);
+            var workingDirectory = command.GetType().GetProperty("WorkingDirectory").GetValue(command);
+            return (string)workingDirectory;
         }
     }
 }
