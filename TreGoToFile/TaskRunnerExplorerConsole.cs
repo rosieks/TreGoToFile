@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using TreGoToFile.Parsers;
 
 namespace TreGoToFile
 {
@@ -25,8 +26,7 @@ namespace TreGoToFile
 
         private static RichTextBox GetConsoleOutput(object sender)
         {
-            var output = sender as RichTextBox;
-            if (output != null && output.Name == "Output")
+            if (sender is RichTextBox output && output.Name == "Output")
             {
                 return output;
             }

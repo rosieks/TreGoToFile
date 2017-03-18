@@ -1,44 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows.Documents;
 
-namespace TreGoToFile
+namespace TreGoToFile.Parsers
 {
-    internal interface IErrorParser
-    {
-        FilePoint GetError(TextPointer ponter);
-    }
-
-    internal class ErrorParser
-    {
-        IErrorParser[] parsers = new[]
-        {
-            new JSHintErrorParser(),
-        };
-
-        internal FilePoint GetError(TextPointer pointer)
-        {
-            foreach (var parser in parsers)
-            {
-                try
-                {
-                    var point = parser.GetError(pointer);
-                    if (point != null)
-                    {
-                        return point;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw;
-                }
-            }
-
-            return null;
-        }
-    }
-
     internal class JSHintErrorParser : IErrorParser
     {
         private static readonly Regex fileError = new Regex(@"line (?<line>\d+)\s+col (?<column>\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
