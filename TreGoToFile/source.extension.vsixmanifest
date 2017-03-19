@@ -3,7 +3,8 @@
   <Metadata>
     <Identity Id="TreGoToFile.Microsoft.0f7103cd-0ba6-4bcf-abe8-0b7aa612da61" Version="0.1" Language="en-US" Publisher="Sławomir Rosiek" />
     <DisplayName>Task Runner Explorer Go To File</DisplayName>
-    <Description xml:space="preserve">Extend Task Runner Explorer of ability to go directly to file where is the issueDo something</Description>
+    <Description xml:space="preserve">Extend Task Runner Explorer of ability to go directly to file where is the issue</Description>
+    <Tags>javascript grunt gulp webpack</Tags>
   </Metadata>
   <Installation>
     <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[14.0,15.0]" />

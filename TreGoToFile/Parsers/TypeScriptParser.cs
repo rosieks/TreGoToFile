@@ -11,7 +11,7 @@ namespace TreGoToFile.Parsers
 {
     internal class TypeScriptParser : IErrorParser
     {
-        private static readonly Regex lineRegex = new Regex(@"(?<path>(?>[\w\.\-]+(?>\\|/))*[\w\.\-]+\.\w+)(?>(:|\s)(?<line>\d+)(?>:(?<column>\d+))?)?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex lineRegex = new Regex(@"(?<path>(?>\w\:\\)?(?>[\w\.\-]+(?>\\|/))*[\w\.\-]+\.\w+)(?>(:|\s)(?<line>\d+)(?>:(?<column>\d+))?)?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         public FilePoint GetError(TextPointer pointer)
         {
