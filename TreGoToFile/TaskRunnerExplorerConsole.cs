@@ -29,10 +29,10 @@ namespace TreGoToFile
                     }
 
                     if (File.Exists(path))
-                    {
+                    {                                  
                         TreGoToFilePackage.DTE.OpenFileInPreviewTab(path, errorLocation.Line, errorLocation.Column);
                     }
-                }
+                }               
             }
         }
 

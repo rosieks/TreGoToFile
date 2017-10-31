@@ -77,6 +77,7 @@
     <Compile Include="Parsers\ErrorParser.cs" />
     <Compile Include="Parsers\IErrorParser.cs" />
     <Compile Include="Parsers\JSHintParser.cs" />
+    <Compile Include="Parsers\WebpackParser.cs" />
     <Compile Include="Parsers\TypeScriptParser.cs" />
     <Compile Include="TaskRunnerExplorerConsole.cs" />
     <Compile Include="TreGoToFilePackage.cs" />
