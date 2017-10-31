@@ -12,6 +12,7 @@ namespace TreGoToFile.Parsers
         IErrorParser[] parsers = new IErrorParser[]
         {
             new JSHintErrorParser(),
+            new WebpackParser(), 
             new TypeScriptParser(),
         };
 

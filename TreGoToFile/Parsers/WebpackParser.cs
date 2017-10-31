@@ -9,13 +9,14 @@ using TreGoToFile.Extensions;
 
 namespace TreGoToFile.Parsers
 {
-    internal class TypeScriptParser : IErrorParser
+    internal class WebpackParser : IErrorParser
     {
-        private static readonly Regex lineRegex = new Regex(@"(?<path>(?>\w\:\\)?(?>[\w\.\-]+(?>\\|\/))*[\w\.\-]+\.\w+)(?>(:|\s)(?<line>\d+)(?>:(?<column>\d+))?)?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex lineRegex = new Regex(@"ERROR in (?<path>(?>\w\:\\)?(?>[\w\.\-]+(?>\\|\/))*[\w\.\-]+\.\w+)(?>( \(|\s)(?<line>\d+)(?>,(?<column>\d+))?)?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         public FilePoint GetError(TextPointer pointer)
         {
-            var match = lineRegex.Match(pointer.GetLine(0));
+            var line = pointer.GetLine(0) + " " + pointer.GetLine(1);
+            var match = lineRegex.Match(line);
             if (match.Success)
             {
                 return new FilePoint
