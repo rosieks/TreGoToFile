@@ -23,6 +23,7 @@ namespace TreGoToFile.Extensions
                 Guid reason = VSConstants.NewDocumentStateReason.Navigation;
                 newDocumentStateContext = openDoc3.SetNewDocumentState((uint)__VSNEWDOCUMENTSTATE.NDS_Provisional, ref reason);
 
+                file = System.IO.Path.GetFullPath(file);
                 dte.ItemOperations.OpenFile(file);
                 if (line.HasValue)
                 {
