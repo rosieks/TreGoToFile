@@ -11,7 +11,7 @@ namespace TreGoToFile.Parsers
 {
     internal class TypeScriptParser : IErrorParser
     {
-        private static readonly Regex lineRegex = new Regex(@"(?<path>(?>\w\:\\)?(?>[\w\.\-]+(?>\\|\/))*[\w\.\-]+\.\w+)(?>(:|\s)(?<line>\d+)(?>:(?<column>\d+))?)?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex lineRegex = new Regex(@"(?<path>(?>\w\:\\)?(?>[\w\.\-]+(?>\\|\/))*[\w\.\-]+\.\w+)(?>((:|\s|)(?<line>\d+)(?>:(?<column>\d+))?)|(\((?<line1>\d+)\,(?<column1>\d+)\)))?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         public FilePoint GetError(TextPointer pointer)
         {
@@ -21,8 +21,8 @@ namespace TreGoToFile.Parsers
                 return new FilePoint
                 {
                     Path = match.Groups["path"].Value,
-                    Line = ToNullableInt(match.Groups["line"]),
-                    Column = ToNullableInt(match.Groups["column"]),
+                    Line = ToNullableInt(match.Groups["line"]) ?? ToNullableInt(match.Groups["line1"]),
+                    Column = ToNullableInt(match.Groups["column"]) ?? ToNullableInt(match.Groups["column1"]),
                 };
             }
             else
